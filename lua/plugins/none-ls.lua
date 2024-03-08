@@ -1,5 +1,6 @@
 return {
 	"nvimtools/none-ls.nvim",
+	requires = { "neovim/nvim-lspconfig" },
 	config = function()
 		local null_ls = require("null-ls")
 		null_ls.setup({
@@ -10,6 +11,15 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+		vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
+    local wk = require("which-key")
+    wk.register({
+      ["<leader>"] = {
+        c = {
+          name = "code",
+          f = { vim.lsp.buf.format, "format" },
+        },
+      },
+    })
 	end,
 }
